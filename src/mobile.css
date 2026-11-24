@@ -36,6 +36,7 @@
   }
 
   .topbar > .kevin-avatar {
+    --avatar-size: 27px !important;
     flex: none;
     width: 27px;
     height: 27px;
@@ -123,7 +124,7 @@
     padding: 4px 0;
   }
 
-  .kevin-avatar {
+  .sanctuary .kevin-avatar {
     --avatar-size: 68px !important;
   }
 
@@ -270,7 +271,7 @@
     gap: 4px;
   }
 
-  .kevin-avatar {
+  .sanctuary .kevin-avatar {
     --avatar-size: 58px !important;
   }
 
