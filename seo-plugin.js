@@ -1,17 +1,18 @@
 import fs from "node:fs";
 
-const NAME = "K.E.V.I.N";
+const NAME = "Emotion Estate";
 const DESCRIPTION =
-  "A free, private emotional-support AI chat that runs entirely in your browser. No account, no API key, and your messages never leave your device.";
+  "A free wellbeing companion with browser-based AI chat, journaling, breathing and grounding tools. No account is needed to get started.";
+const DEFAULT_SITE = "https://emotionestatevl.vercel.app";
 
-const escapeXml = (s) => s.replace(/[<>&'"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" })[c]);
+const escapeXml = (s) => s.replace(/[<>&'\"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '\"': "&quot;" })[c]);
 
 /** Build the JSON-LD graph. Exported for testing. */
 export function buildJsonLd(site, faq) {
   const app = {
     "@type": "WebApplication",
     name: NAME,
-    alternateName: "Keeping Every Voice in Need",
+    alternateName: "Kevin",
     description: DESCRIPTION,
     applicationCategory: "LifestyleApplication",
     operatingSystem: "Any modern web browser",
@@ -70,8 +71,9 @@ export function sitemapXml(site, date = new Date()) {
 
 /**
  * Set your public URL with SITE_URL (or VITE_SITE_URL) when building, e.g.
- *   SITE_URL=https://kevin.example.com npm run build
- * On Vercel, VERCEL_PROJECT_PRODUCTION_URL is picked up automatically.
+ *   SITE_URL=https://emotionestatevl.vercel.app npm run build
+ * On Vercel, VERCEL_PROJECT_PRODUCTION_URL is picked up automatically; otherwise
+ * the production URL above is used so canonical metadata is always emitted.
  */
 export default function seo() {
   let site = "";
@@ -81,9 +83,9 @@ export default function seo() {
     name: "kevin-seo",
     configResolved(config) {
       const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "";
-      site = (process.env.SITE_URL || config.env?.VITE_SITE_URL || vercel || "").trim().replace(/\/+$/, "");
+      site = (process.env.SITE_URL || config.env?.VITE_SITE_URL || vercel || DEFAULT_SITE).trim().replace(/\/+$/, "");
       if (config.command === "build") {
-        console.log(site ? `[seo] canonical site: ${site}` : "[seo] SITE_URL not set — canonical, og:image and sitemap are omitted");
+        console.log(`[seo] canonical site: ${site}`);
       }
     },
     transformIndexHtml: { order: "pre", handler: (html) => transformHtml(html, site, faq) },
