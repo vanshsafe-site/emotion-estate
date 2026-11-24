@@ -1,0 +1,281 @@
+/* Mobile-specific layout refinements. Keep the primary actions visible without letting the toolbar wrap. */
+@media (max-width: 560px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .app {
+    width: 100%;
+    min-width: 0;
+    height: 100dvh;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .stage {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .topbar {
+    flex: none;
+    min-height: 56px;
+    gap: 5px;
+    padding: max(6px, env(safe-area-inset-top, 0px)) 10px 6px;
+  }
+
+  .menu-btn {
+    flex: none;
+    width: 34px;
+    height: 36px;
+    margin-left: -5px;
+  }
+
+  .topbar > .kevin-avatar {
+    flex: none;
+    width: 27px;
+    height: 27px;
+  }
+
+  .topbar-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 15px;
+  }
+
+  .topbar-actions {
+    flex: none;
+    gap: 0;
+  }
+
+  /* Keep the status and settings accessible; move secondary actions out of the cramped toolbar. */
+  .topbar-actions button[aria-label="Breathing exercise"],
+  .topbar-actions button[aria-label="Export conversation"] {
+    display: none;
+  }
+
+  .topbar-actions .status {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 34px;
+    margin: 0 2px 0 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .topbar-actions .status-dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .topbar-actions > .icon-btn {
+    flex: none;
+    width: 36px;
+    height: 36px;
+  }
+
+  .scroll {
+    min-width: 0;
+    scrollbar-width: none;
+  }
+
+  .scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .column {
+    min-width: 0;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .sanctuary {
+    width: 100%;
+    min-width: 0;
+    padding: 18px 0 34px;
+  }
+
+  .sanctuary-hero {
+    grid-template-columns: minmax(0, 1fr) 76px;
+    gap: 8px;
+    min-height: 150px;
+  }
+
+  .sanctuary-copy h2 {
+    font-size: clamp(32px, 9vw, 38px);
+    overflow-wrap: anywhere;
+  }
+
+  .sanctuary-lede {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .avatar-button {
+    min-width: 0;
+    padding: 4px 0;
+  }
+
+  .kevin-avatar {
+    --avatar-size: 68px !important;
+  }
+
+  .avatar-presence {
+    gap: 4px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .mood-check {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+    margin: 14px 0 18px;
+  }
+
+  .moods-list {
+    width: 100%;
+    gap: 7px;
+  }
+
+  .mood-chip {
+    min-height: 40px;
+    padding: 7px 11px;
+  }
+
+  .tool-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .tool-card {
+    min-width: 0;
+    min-height: 74px;
+    grid-template-columns: 40px minmax(0, 1fr) 18px;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .tool-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tool-copy small {
+    overflow-wrap: anywhere;
+  }
+
+  /* Welcome already has an ambience card; avoid a second floating control over the chat composer. */
+  .ambient-position {
+    display: none;
+  }
+
+  .dock {
+    flex: none;
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .composer {
+    gap: 6px;
+    padding: 5px 5px 5px 13px;
+  }
+
+  .composer textarea {
+    min-width: 0;
+    max-height: 120px;
+    font-size: 16px;
+  }
+
+  .send {
+    width: 42px;
+    height: 42px;
+  }
+
+  .thread {
+    gap: 22px;
+    padding-top: 20px;
+  }
+
+  .msg-bot {
+    grid-template-columns: 20px minmax(0, 1fr);
+    column-gap: 9px;
+  }
+
+  .prose {
+    min-width: 0;
+    font-size: 16.5px;
+    line-height: 1.65;
+  }
+
+  .modal {
+    max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .modal-foot {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .journal-foot {
+    align-items: flex-start;
+  }
+
+  .journal-status {
+    flex: 1 1 100%;
+    text-align: left;
+  }
+
+  .drawer {
+    width: min(420px, 100vw);
+    width: min(420px, 100dvw);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .drawer-body {
+    padding: 20px 18px;
+  }
+
+  .overlay {
+    padding: max(12px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 360px) {
+  .topbar {
+    gap: 3px;
+    padding-right: 7px;
+    padding-left: 8px;
+  }
+
+  .topbar > .kevin-avatar {
+    display: none;
+  }
+
+  .topbar-title {
+    font-size: 14px;
+  }
+
+  .sanctuary-hero {
+    grid-template-columns: minmax(0, 1fr) 64px;
+    gap: 4px;
+  }
+
+  .kevin-avatar {
+    --avatar-size: 58px !important;
+  }
+
+  .column {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+}
