@@ -204,10 +204,13 @@
   background: transparent;
 }
 
-/* Keep the lantern prominent on mobile while matching desktop chat eye dimensions. */
+/* Mobile chat: enlarge only the yellow orb, never the facial features. */
 @media (max-width: 560px) {
   .stage:has(.thread) .topbar > .kevin-avatar {
+    display: grid !important;
     top: 30px;
+    width: clamp(180px, 52vw, 200px) !important;
+    height: clamp(180px, 52vw, 200px) !important;
     --avatar-size: clamp(180px, 52vw, 200px) !important;
     filter: drop-shadow(0 0 56px rgba(239, 182, 106, 0.5));
   }
@@ -216,11 +219,16 @@
     filter: drop-shadow(0 0 72px rgba(239, 182, 106, 0.68));
   }
 
+  /* Keep both eyes at the desktop chat size of 132px avatar geometry. */
+  .stage:has(.thread) .topbar > .kevin-avatar .kevin-face {
+    inset: 27% 20% 25%;
+  }
+
   .stage:has(.thread) .topbar > .kevin-avatar .kevin-eye {
-    width: calc(132px * 0.075);
-    height: calc(132px * 0.16);
-    max-height: 18px;
-    min-height: 4px;
+    width: 9.9px !important;
+    height: 21.12px !important;
+    min-height: 0;
+    max-height: none;
   }
 
   .scroll:has(.thread)::before { inset: 178px -14% -12%; }
