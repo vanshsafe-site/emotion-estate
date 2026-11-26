@@ -154,11 +154,17 @@
   .stage:has(.thread) .topbar > .kevin-avatar { transition: none; }
 }
 
-/* Strong 3D perspective: the tabletop is broad at the user's edge and narrows toward Kevin. */
+/*
+ * First-person tabletop perspective: from the user's low seated viewpoint,
+ * the near edge fills the foreground and the far edge narrows toward Kevin.
+ * The trapezoid supplies the strong foreshortening; the perspective transform
+ * adds a subtle downward view of the wood surface (about 80° to the screen).
+ */
 .scroll:has(.thread)::before {
   inset: 164px -10% -18%;
   transform: perspective(760px) rotateX(12deg) scale(1.08);
   transform-origin: center top;
+  clip-path: polygon(27% 0, 73% 0, 100% 100%, 0 100%);
   border-top: 2px solid rgba(255, 219, 167, 0.22);
   border-radius: 48% 48% 0 0 / 5% 5% 0 0;
   background:
@@ -185,6 +191,7 @@
   .scroll:has(.thread)::before {
     inset: 140px -14% -12%;
     transform: perspective(620px) rotateX(10deg) scale(1.1);
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
   }
 }
 
