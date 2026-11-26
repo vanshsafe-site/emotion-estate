@@ -9,7 +9,7 @@ const PHASE_LABEL = {
   error: "Couldn't start",
 };
 
-export default function TopBar({ title, kevin, hasMessages, onMenu, onBreathe, onExport, onSettings, onStart }) {
+export default function TopBar({ title, kevin, hasMessages, onMenu, onBreathe, onImmediateHelp, onToolkit, onExport, onSettings, onStart }) {
   const { phase, device, tps, load } = kevin;
   const label =
     phase === "ready"
@@ -25,6 +25,12 @@ export default function TopBar({ title, kevin, hasMessages, onMenu, onBreathe, o
       <div className="topbar-title">{title}</div>
 
       <div className="topbar-actions">
+        <button type="button" className="immediate-help-topbar" onClick={onImmediateHelp}>
+          <Icon name="phone" size={16} /> <span>Immediate help</span>
+        </button>
+        <button type="button" className="icon-btn toolkit-topbar" onClick={onToolkit} aria-label="Explore coping tools" title="Explore coping tools">
+          <Icon name="spark" />
+        </button>
         <button
           type="button"
           className={`status status-${phase}`}

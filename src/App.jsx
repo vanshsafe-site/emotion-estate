@@ -15,9 +15,11 @@ import Sidebar from "./components/Sidebar.jsx";
 import TopBar from "./components/TopBar.jsx";
 import Welcome from "./components/Welcome.jsx";
 import { AmbientPlayer, Grounding, Journal } from "./components/Wellness.jsx";
+import { ImmediateHelp, WellnessToolkit } from "./components/SupportTools.jsx";
 import AuthGate from "./components/AuthGate.jsx";
 import { supabase } from "./lib/supabase.js";
 import { deriveVaultKey, decryptJson, encryptJson } from "./lib/vaultCrypto.js";
+import "./wellness.css";
 
 export default function App() {
   const [settings, updateSettings] = useLocalStorage("kevin.settings.v2", DEFAULT_SETTINGS);
@@ -33,6 +35,8 @@ export default function App() {
   const [showBreathing, setShowBreathing] = useState(false);
   const [showJournal, setShowJournal] = useState(false);
   const [showGrounding, setShowGrounding] = useState(false);
+  const [showImmediateHelp, setShowImmediateHelp] = useState(false);
+  const [showWellnessToolkit, setShowWellnessToolkit] = useState(false);
   const [ambientPlaying, setAmbientPlaying] = useState(false);
   const [showGpuPrompt, setShowGpuPrompt] = useState(false);
   const [session, setSession] = useState(null);
@@ -340,6 +344,8 @@ export default function App() {
           hasMessages={!isEmpty}
           onMenu={openSidebar}
           onBreathe={() => setShowBreathing(true)}
+          onImmediateHelp={() => setShowImmediateHelp(true)}
+          onToolkit={() => setShowWellnessToolkit(true)}
           onExport={exportChat}
           onSettings={() => setShowSettings(true)}
           onStart={startWithPrompt}
@@ -354,6 +360,8 @@ export default function App() {
                 onBreathe={() => setShowBreathing(true)}
                 onJournal={() => setShowJournal(true)}
                 onGrounding={() => setShowGrounding(true)}
+                onImmediateHelp={() => setShowImmediateHelp(true)}
+                onToolkit={() => setShowWellnessToolkit(true)}
                 ambientActive={ambientPlaying}
                 onAmbient={() => setAmbientPlaying((active) => !active)}
                 onStart={startWithPrompt}
@@ -409,6 +417,8 @@ export default function App() {
       {showBreathing && <Breathing onClose={closeBreathing} />}
       {showJournal && <Journal onClose={() => setShowJournal(false)} />}
       {showGrounding && <Grounding onClose={() => setShowGrounding(false)} />}
+      {showImmediateHelp && <ImmediateHelp onClose={() => setShowImmediateHelp(false)} />}
+      {showWellnessToolkit && <WellnessToolkit onClose={() => setShowWellnessToolkit(false)} />}
       <div className="ambient-position">
         <AmbientPlayer active={ambientPlaying} onToggle={() => setAmbientPlaying((playing) => !playing)} />
       </div>

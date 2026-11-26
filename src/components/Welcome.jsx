@@ -4,7 +4,7 @@ import KevinAvatar from "./KevinAvatar.jsx";
 import ModelGate from "./ModelGate.jsx";
 import Icon from "./Icon.jsx";
 
-export default function Welcome({ kevin, onPickMood, onBreathe, onJournal, onGrounding, ambientActive, onAmbient, onStart }) {
+export default function Welcome({ kevin, onPickMood, onBreathe, onJournal, onGrounding, onImmediateHelp, onToolkit, ambientActive, onAmbient, onStart }) {
   return (
     <section className="sanctuary">
       <h1 className="sr-only">Emotion Estate wellbeing sanctuary</h1>
@@ -30,6 +30,15 @@ export default function Welcome({ kevin, onPickMood, onBreathe, onJournal, onGro
             <button key={m.key} type="button" className="mood-chip" onClick={() => onPickMood(m.text)}>{m.label}</button>
           ))}
         </div>
+      </div>
+
+      <div className="wellness-actions">
+        <button type="button" className="immediate-help-button" onClick={onImmediateHelp}>
+          <Icon name="phone" size={18} /> Immediate help & crisis lines
+        </button>
+        <button type="button" className="toolkit-button" onClick={onToolkit}>
+          <Icon name="spark" size={18} /> Explore coping tools
+        </button>
       </div>
 
       <div className="tool-grid">

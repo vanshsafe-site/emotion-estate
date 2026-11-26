@@ -1,0 +1,56 @@
+/* Immediate support and self-guided wellness toolkit */
+.wellness-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; }
+.immediate-help-button, .toolkit-button, .immediate-help-topbar {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 42px; padding: 9px 14px; border: 1px solid var(--line-strong); border-radius: 999px;
+  background: var(--surface); color: var(--text); font-weight: 650; text-decoration: none;
+}
+.immediate-help-button, .immediate-help-topbar { border-color: color-mix(in srgb, var(--rose) 55%, var(--line)); color: var(--rose); }
+.immediate-help-button:hover, .immediate-help-topbar:hover { background: var(--rose-tint); }
+.toolkit-button:hover { background: var(--surface-2); border-color: var(--lantern); }
+.immediate-help-topbar { min-height: 38px; padding: 6px 11px; font-size: 12px; white-space: nowrap; }
+.toolkit-topbar { color: var(--lantern-text); }
+.support-modal { width: min(560px, 100%); max-height: min(88dvh, 820px); overflow-y: auto; text-align: left; }
+.help-modal .modal-title, .toolkit-modal .modal-title { margin-bottom: 8px; }
+.help-modal .modal-note, .toolkit-modal .modal-note { max-width: 62ch; line-height: 1.65; }
+.help-section { margin-top: 22px; }
+.help-section h3 { margin: 0 0 9px; font-family: var(--serif); font-size: 19px; font-weight: 500; }
+.help-list { display: grid; gap: 8px; list-style: none; }
+.help-list li { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink); }
+.help-list li > span:first-child { display: grid; gap: 2px; }
+.help-list li strong { font-size: 13px; font-weight: 600; }
+.help-list li small { font-size: 11px; }
+.help-call { display: inline-flex; justify-content: center; align-items: center; gap: 5px; min-height: 36px; padding: 6px 10px; border-radius: 9px; background: var(--surface-2); color: var(--lantern-text); font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.help-call:hover { text-decoration: underline; text-underline-offset: 3px; }
+.help-contact-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.help-caveat, .help-footer { margin-top: 10px; color: var(--dim); font-size: 12px; line-height: 1.55; }
+.help-footer { padding-top: 13px; border-top: 1px solid var(--line); }
+.practice-list { display: grid; gap: 8px; margin-top: 18px; }
+.practice-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink); color: var(--text); text-align: left; }
+.practice-option:hover { border-color: var(--lantern); background: var(--surface-2); }
+.practice-option > span { display: grid; gap: 3px; }
+.practice-option strong { font-family: var(--serif); font-size: 16px; font-weight: 500; }
+.practice-option small { font-size: 12px; }
+.toolkit-back { margin: -4px 0 8px; padding: 5px 0; border: 0; background: transparent; color: var(--lantern-text); font-weight: 650; }
+.toolkit-back:hover { text-decoration: underline; }
+.practice-step { display: grid; place-items: center; min-height: 170px; margin-top: 20px; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--ink); text-align: center; }
+.practice-count { color: var(--lantern-text); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+.practice-step p { max-width: 42ch; margin-top: 10px; font-family: var(--serif); font-size: 21px; line-height: 1.5; }
+.toolkit-modal .help-caveat { margin-top: 18px; }
+@media (max-width: 900px) {
+  .immediate-help-topbar { padding: 6px 9px; }
+}
+@media (max-width: 650px) {
+  .topbar-actions { gap: 0; }
+  .immediate-help-topbar { width: 38px; min-width: 38px; padding: 0; border-radius: 10px; }
+  .immediate-help-topbar span { display: none; }
+  .toolkit-topbar { display: none; }
+  .help-list li { align-items: flex-start; }
+}
+@media (max-width: 420px) {
+  .support-modal { padding: 28px 17px 18px; }
+  .help-list li { flex-direction: column; }
+  .help-list li > span:first-child { width: 100%; }
+  .help-contact-actions { width: 100%; }
+  .help-call { min-height: 40px; }
+}
