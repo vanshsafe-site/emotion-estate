@@ -1,42 +1,37 @@
-/* Conversation room: Kevin sits across the table while the transcript stays in its own clear reading area. */
+/* Conversation room: a first-person seat across the table from K.E.V.I.N. */
 .stage:has(.thread) .topbar {
   position: relative;
   z-index: 3;
 }
 
-.kevin-scene-avatar {
+/* The existing mascot in the top bar becomes the larger scene mascot in every chat. */
+.stage:has(.thread) .topbar > .kevin-avatar {
   position: absolute;
+  z-index: 2;
   top: 64px;
   left: 50%;
-  display: grid;
-  justify-items: center;
-  gap: 5px;
-  width: 150px;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.kevin-scene-avatar .kevin-avatar {
   --avatar-size: 132px !important;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.3));
   transition: filter 0.45s ease, opacity 0.45s ease;
 }
 
-.kevin-scene-avatar .kevin-avatar.is-asleep {
-  filter: grayscale(1) saturate(0.25);
+.stage:has(.thread) .topbar:not(:has(.status-ready)) > .kevin-avatar {
+  filter: grayscale(1) saturate(0.2) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.2));
   opacity: 0.58;
   box-shadow: none;
 }
 
-.kevin-scene-avatar .kevin-avatar.is-awake .kevin-rays {
-  box-shadow: 0 0 42px 10px rgba(239, 182, 106, 0.32);
+.stage:has(.thread) .topbar:has(.status-ready) > .kevin-avatar .kevin-rays {
+  box-shadow: 0 0 42px 10px rgba(239, 182, 106, 0.38);
 }
 
-.kevin-scene-avatar .kevin-eye {
+.stage:has(.thread) .topbar > .kevin-avatar .kevin-eye {
   position: relative;
   overflow: hidden;
 }
 
-.kevin-scene-avatar .kevin-avatar.is-awake .kevin-eye::after {
+.stage:has(.thread) .topbar:has(.status-ready) > .kevin-avatar .kevin-eye::after {
   content: "";
   position: absolute;
   top: 18%;
@@ -48,13 +43,22 @@
   box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
 }
 
-.kevin-scene-label {
-  color: rgba(255, 248, 230, 0.9);
-  font-size: 11px;
-  font-weight: 700;
+.stage:has(.thread) .topbar > .kevin-avatar::after {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 50%;
+  width: max-content;
+  transform: translateX(-50%);
+  color: rgba(255, 248, 230, 0.94);
+  content: "K.E.V.I.N · RESTING";
+  font-size: 10px;
+  font-weight: 750;
   letter-spacing: 0.14em;
   text-shadow: 0 2px 6px #171a24, 0 0 3px #171a24;
-  text-transform: uppercase;
+}
+
+.stage:has(.thread) .topbar:has(.status-ready) > .kevin-avatar::after {
+  content: "K.E.V.I.N · HERE WITH YOU";
 }
 
 .scroll:has(.thread) {
@@ -63,6 +67,7 @@
   isolation: isolate;
 }
 
+/* The tabletop recedes toward Kevin, with a darker foreground like sitting at the table. */
 .scroll:has(.thread)::before {
   content: "";
   position: absolute;
@@ -70,7 +75,7 @@
   inset: 164px 0 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(28, 24, 21, 0.05), rgba(28, 24, 21, 0.52)),
+    linear-gradient(180deg, rgba(28, 24, 21, 0.03) 0%, rgba(28, 24, 21, 0.16) 32%, rgba(17, 15, 14, 0.72) 100%),
     repeating-linear-gradient(3deg, rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 10px),
     linear-gradient(145deg, #674a37 0%, #49362c 48%, #302820 100%);
   box-shadow: inset 0 18px 30px rgba(0, 0, 0, 0.22);
@@ -78,8 +83,8 @@
 
 .scroll:has(.thread) > .column {
   position: relative;
-  height: 100%;
   z-index: 1;
+  height: 100%;
 }
 
 .scroll:has(.thread) .thread {
@@ -89,7 +94,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 18px clamp(14px, 3vw, 36px) 28px;
-  background: linear-gradient(180deg, rgba(30, 25, 22, 0.2), rgba(22, 20, 19, 0.54));
+  background: linear-gradient(180deg, rgba(30, 25, 22, 0.16), rgba(22, 20, 19, 0.38));
   scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
 }
 
@@ -125,7 +130,7 @@
 }
 
 .scroll:has(.thread) .msg-time {
-  color: rgba(255, 250, 238, 0.88);
+  color: rgba(255, 250, 238, 0.92);
   text-shadow: 0 1px 3px #111;
 }
 
@@ -136,21 +141,15 @@
 }
 
 @media (max-width: 560px) {
-  .kevin-scene-avatar {
+  .stage:has(.thread) .topbar > .kevin-avatar {
     top: 48px;
-    width: 118px;
-  }
-
-  .kevin-scene-avatar .kevin-avatar {
     --avatar-size: 104px !important;
   }
-
-  .kevin-scene-label { font-size: 10px; }
 
   .scroll:has(.thread)::before { inset: 140px 0 0; }
   .scroll:has(.thread) .thread { inset: 140px 0 0; padding: 14px 12px 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kevin-scene-avatar .kevin-avatar { transition: none; }
+  .stage:has(.thread) .topbar > .kevin-avatar { transition: none; }
 }
