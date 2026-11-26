@@ -157,8 +157,6 @@
 /*
  * First-person tabletop perspective: from the user's low seated viewpoint,
  * the near edge fills the foreground and the far edge narrows toward Kevin.
- * The trapezoid supplies the strong foreshortening; the perspective transform
- * adds a subtle downward view of the wood surface (about 80° to the screen).
  */
 .scroll:has(.thread)::before {
   inset: 164px -10% -18%;
@@ -197,4 +195,16 @@
 
 @media (prefers-reduced-motion: reduce) {
   .scroll:has(.thread)::before { transform: none; }
+}
+
+/* Keep the tabletop one even color; retain the trapezoid perspective without shading. */
+.scroll:has(.thread)::before {
+  border: 0;
+  border-radius: 0;
+  background: #684833;
+  box-shadow: none;
+}
+
+.scroll:has(.thread) .thread {
+  background: transparent;
 }
