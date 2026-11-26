@@ -209,20 +209,25 @@
   background: transparent;
 }
 
-/* Give Kevin more presence on phones and scale his eyes with the larger avatar. */
+/* On mobile, make the glowing orb the focal point and keep the facial features subtle. */
 @media (max-width: 560px) {
   .stage:has(.thread) .topbar > .kevin-avatar {
-    top: 34px;
-    --avatar-size: clamp(124px, 36vw, 148px) !important;
+    top: 30px;
+    --avatar-size: clamp(172px, 48vw, 200px) !important;
+    filter: drop-shadow(0 0 56px rgba(239, 182, 106, 0.5));
+  }
+
+  .stage:has(.thread) .topbar:has(.status-ready) > .kevin-avatar {
+    filter: drop-shadow(0 0 72px rgba(239, 182, 106, 0.68));
   }
 
   .stage:has(.thread) .topbar > .kevin-avatar .kevin-eye {
-    width: calc(var(--avatar-size) * 0.095);
-    height: calc(var(--avatar-size) * 0.19);
+    width: calc(var(--avatar-size) * 0.045);
+    height: calc(var(--avatar-size) * 0.09);
     max-height: none;
     min-height: 0;
   }
 
-  .scroll:has(.thread)::before { inset: 156px -14% -12%; }
-  .scroll:has(.thread) .thread { inset: 156px 0 0; }
+  .scroll:has(.thread)::before { inset: 178px -14% -12%; }
+  .scroll:has(.thread) .thread { inset: 178px 0 0; }
 }
