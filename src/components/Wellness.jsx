@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon.jsx";
 
+const PAPER_FONT = '"Comic Sans MS", "Segoe Print", "Bradley Hand", cursive';
+
 export function Journal({ onClose }) {
   const [text, setText] = useState(() => localStorage.getItem("kevin-journal-draft") || "");
   const [saved, setSaved] = useState(false);
@@ -19,24 +21,48 @@ export function Journal({ onClose }) {
     setTimeout(() => setSaved(false), 1800);
   };
 
+  const today = new Intl.DateTimeFormat(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  }).format(new Date());
+
   return (
-    <div className="overlay" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
+    <div className="overlay journal-overlay" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
       <section className="modal journal-modal" role="dialog" aria-modal="true" aria-labelledby="journal-title">
-        <button ref={closeRef} type="button" className="icon-btn modal-close" onClick={onClose} aria-label="Close journal">
+        <button ref={closeRef} type="button" className="icon-btn modal-close journal-close" onClick={onClose} aria-label="Close journal">
           <Icon name="x" />
         </button>
-        <p className="modal-kicker">PRIVATE NOTEBOOK</p>
-        <h2 id="journal-title" className="modal-title">A little room for your thoughts</h2>
-        <textarea
-          className="journal-text"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-          placeholder="What is here with you right now?"
-          aria-label="Journal entry"
-        />
+
+        <div className="notepad-heading">
+          <p className="modal-kicker">PRIVATE NOTEBOOK</p>
+          <h2 id="journal-title" className="modal-title">A little room for your thoughts</h2>
+          <time className="journal-date" dateTime={new Date().toISOString().slice(0, 10)}>{today}</time>
+        </div>
+
+        <div className="notepad-wrap">
+          <div className="notepad-binding" aria-hidden="true">
+            {Array.from({ length: 9 }, (_, index) => <span key={index} />)}
+          </div>
+          <div className="notepad-sheet">
+            <textarea
+              className="journal-text"
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+              placeholder="Dear diary…"
+              aria-label="Journal entry"
+              style={{ fontFamily: PAPER_FONT }}
+            />
+          </div>
+        </div>
+
         <div className="modal-foot journal-foot">
-          <span className="journal-status">{saved ? "Saved on this device" : "Stored only in this browser"}</span>
-          <button type="button" className="btn btn-primary" onClick={save}><Icon name="check" size={16} /> Save entry</button>
+          <span className="journal-status" aria-live="polite">
+            {saved ? "Saved on this device" : "Stored only in this browser"}
+          </span>
+          <button type="button" className="btn btn-primary journal-save" onClick={save}>
+            <Icon name="check" size={16} /> Save entry
+          </button>
         </div>
       </section>
     </div>
@@ -87,7 +113,6 @@ export function Grounding({ onClose }) {
 }
 
 export function AmbientPlayer({ active, onToggle }) {
-  const audioRef = useRef(null);
   const nodesRef = useRef(null);
 
   useEffect(() => {
